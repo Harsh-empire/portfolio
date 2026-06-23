@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FadeUp } from "@/components/FadeUp";
+import emailjs from '@emailjs/browser';
 
 export default function ContactTerminal() {
   const [formData, setFormData] = useState({
@@ -20,36 +21,29 @@ export default function ContactTerminal() {
     setStatus("loading");
     
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "0ff010fe-8683-4667-9317-eb34e0af40ef",
-          name: formData.callsign,
-          email: formData.origin,
-          subject: `Portfolio Transmission from ${formData.callsign}`,
-          frequency: formData.frequency,
-          message: formData.payload,
-        }),
-      });
+      const templateParams = {
+        callsign: formData.callsign,
+        origin: formData.origin,
+        frequency: formData.frequency,
+        payload: formData.payload,
+      };
 
-      const result = await response.json();
-      if (result.success) {
-        setStatus("success");
-        setTimeout(() => {
-          setFormData({ callsign: "", origin: "", frequency: "", payload: "" });
-          setStatus("idle");
-        }, 4000);
-      } else {
-        console.error("Web3Forms Error:", result);
-        setStatus("error");
-        setTimeout(() => setStatus("idle"), 4000);
-      }
+      const result = await emailjs.send(
+        'service_ty280nx',   // Service ID
+        'template_px8ovkh',  // Template ID
+        templateParams,
+        'mbFQu4QlGQn9GQqin'  // Public Key
+      );
+
+      console.log('EmailJS Success:', result.text);
+      setStatus("success");
+      setTimeout(() => {
+        setFormData({ callsign: "", origin: "", frequency: "", payload: "" });
+        setStatus("idle");
+      }, 4000);
+      
     } catch (error) {
-      console.error("Fetch Error:", error);
+      console.error("EmailJS Error:", error);
       setStatus("error");
       setTimeout(() => setStatus("idle"), 4000);
     }
