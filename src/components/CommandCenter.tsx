@@ -3,15 +3,13 @@ import { FadeUp, StaggeredHeading } from "@/components/FadeUp";
 import { FiArrowRight } from "react-icons/fi";
 
 const certifications = [
-  { name: "aws certified solutions architect", status: "active" },
-  { name: "certified kubernetes administrator", status: "active" },
-  { name: "deeplearning.ai specialized", status: "active" },
+  { name: "oracle certified: ai foundations associate", status: "active" },
+  { name: "gen ai engineering mastermind - outskill", status: "active" }
 ];
 
 const simulations = [
-  { name: "hyper-parameter optimization", link: "#" },
-  { name: "distributed consensus testing", link: "#" },
-  { name: "anomaly detection testbed", link: "#" },
+  { name: "jpmorgan chase: software engineering", link: "#" },
+  { name: "goldman sachs: operations job simulation", link: "#" }
 ];
 
 export default function CommandCenter() {
