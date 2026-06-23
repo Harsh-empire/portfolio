@@ -20,18 +20,18 @@ export const Showcase = ({ inView }: { inView: boolean }) => {
   const cameraGroupRef = useRef<any>();
 
   const [dataTags1, setDataTags1] = useState([
-    { id: 1, x: 2.5, y: 1.0, label: 'COMPTIA SECURITY+', icon: 'shield', visible: false },
-    { id: 2, x: 2.5, y: 0.0, label: 'ISSUED: 2024', icon: 'shield', visible: false },
+    { id: 1, x: 2.5, y: 1.0, label: 'ORACLE AI FOUNDATIONS', icon: 'shield', visible: false },
+    { id: 2, x: 2.5, y: 0.0, label: 'ISSUED: 2025', icon: 'shield', visible: false },
     { id: 3, x: 2.5, y: -1.0, label: 'VALIDATED', icon: 'shield', visible: false }
   ]);
   const [dataTags2, setDataTags2] = useState([
-    { id: 1, x: 2.5, y: 1.0, label: 'TENSORFLOW DEV', icon: 'cpu', visible: false },
+    { id: 1, x: 2.5, y: 1.0, label: 'GEN AI MASTERMIND', icon: 'cpu', visible: false },
     { id: 2, x: 2.5, y: 0.0, label: 'ISSUED: 2025', icon: 'cpu', visible: false },
     { id: 3, x: 2.5, y: -1.0, label: 'VALIDATED', icon: 'cpu', visible: false }
   ]);
   const [dataTags3, setDataTags3] = useState([
-    { id: 1, x: 2.5, y: 1.0, label: 'AWS ARCHITECT', icon: 'code', visible: false },
-    { id: 2, x: 2.5, y: 0.0, label: 'ISSUED: 2026', icon: 'code', visible: false },
+    { id: 1, x: 2.5, y: 1.0, label: 'JPMORGAN & CHASE', icon: 'code', visible: false },
+    { id: 2, x: 2.5, y: 0.0, label: 'SOFTWARE SIMULATION', icon: 'code', visible: false },
     { id: 3, x: 2.5, y: -1.0, label: 'VALIDATED', icon: 'code', visible: false }
   ]);
 

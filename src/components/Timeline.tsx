@@ -144,29 +144,17 @@ function SpiralCar3D({ scrollYProgress }: { scrollYProgress: any }) {
 
 const experiences = [
   {
-    role: "ai engineering intern",
-    company: "tech giant corp",
-    year: "2025 - present",
-    body: "architecting enterprise-scale rag systems and optimizing llm inference pipelines for high throughput.",
+    role: "ai intern",
+    company: "machine learning & nlp operations",
+    year: "jan 2026 - present",
+    body: "engineered predictive models using scikit-learn and pandas to enhance data-driven decision-making. developed nlp pipelines for sentiment analysis and text classification via nltk and spacy libraries. deployed model endpoints via restful apis using the flask framework.",
   },
   {
-    role: "backend systems intern",
-    company: "fintech scaleup",
-    year: "2024 - 2025",
-    body: "developed low-latency rust microservices and managed kafka event streaming for core banking.",
-  },
-  {
-    role: "data engineering intern",
-    company: "analytics inc",
-    year: "2024",
-    body: "built scalable data lakes and automated etl processes processing terabytes of unstructured data.",
-  },
-  {
-    role: "open source contributor",
-    company: "various projects",
-    year: "2023 - 2024",
-    body: "contributed core features to distributed systems libraries and machine learning toolkits.",
-  },
+    role: "java developer intern",
+    company: "backend systems development",
+    year: "jul 2025 - dec 2025",
+    body: "architected real-time client-server chat applications using java sockets for multi-client concurrency. implemented recommendation engines with apache mahout, utilizing pearson similarity for personalization. optimized system maintainability by applying robust oop principles and clean coding standards.",
+  }
 ];
 
 export default function TimelineSection() {

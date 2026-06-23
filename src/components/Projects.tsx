@@ -4,29 +4,23 @@ import { FadeUp, StaggeredHeading } from "@/components/FadeUp";
 
 const projects = [
   {
-    title: "securify core",
-    description: "enterprise-grade access management system built with rust and kafka. processes millions of authentication events per second with zero-trust architecture.",
-    tech: ["rust", "kafka", "postgres", "redis"],
+    title: "genai data analytics",
+    description: "tata: performed risk profiling and delinquency prediction using ai-driven predictive modeling for collection strategies. synthesized complex datasets into high-impact business storytelling reports.",
+    tech: ["python", "genai", "data analytics", "predictive modeling"],
     link: "#",
   },
   {
-    title: "neural engine",
-    description: "distributed training pipeline for large language models. orchestrates gpu clusters via kubernetes to reduce training time by 40%.",
-    tech: ["python", "pytorch", "k8s", "aws"],
+    title: "cyber security transformation",
+    description: "deloitte: completed intensive tracks in cyber security, technology development, and data analytics. practiced enterprise-level coding standards and security-first development protocols.",
+    tech: ["cyber security", "data analytics", "enterprise standards"],
     link: "#",
   },
   {
-    title: "data sentinel",
-    description: "anomaly detection engine for unstructured data streams. uses advanced ml techniques to flag security breaches in real-time.",
-    tech: ["python", "tensorflow", "spark", "gcp"],
+    title: "advanced software engineering",
+    description: "walmart global tech: applied advanced data structures and software architecture to optimize relational database systems for enterprise scale.",
+    tech: ["java", "sql", "software architecture", "data structures"],
     link: "#",
-  },
-  {
-    title: "nexus gateway",
-    description: "high-performance api gateway handling edge routing and rate limiting. built entirely from scratch in go for maximum throughput.",
-    tech: ["go", "grpc", "docker", "edge"],
-    link: "#",
-  },
+  }
 ];
 
 export default function ProjectsSection() {

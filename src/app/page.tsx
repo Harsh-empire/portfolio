@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import Loader from "@/components/Loader";
+import { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
 import DigitalBrainSection from "@/components/DigitalBrain";
 import TimelineSection from "@/components/Timeline";
@@ -15,16 +14,13 @@ import { BootSequence } from "@/components/BootSequence";
 import { AIChatTerminal } from "@/components/AIChatTerminal";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
   const [isBooted, setIsBooted] = useState(false);
 
   return (
     <main className="min-h-screen bg-black">
       {!isBooted && <BootSequence onComplete={() => setIsBooted(true)} />}
       
-      {isBooted && loading && <Loader onComplete={() => setLoading(false)} />}
-      
-      {isBooted && !loading && (
+      {isBooted && (
         <>
           <FixedVideoBackground />
           <Navbar />
