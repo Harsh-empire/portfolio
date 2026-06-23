@@ -1,11 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useVelocity, useMotionValueEvent, MotionValue } from "framer-motion";
+import { useVelocity, useMotionValueEvent, MotionValue, useSpring } from "framer-motion";
 
 export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolean) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const scrollVelocity = useVelocity(scrollYProgress);
+  const rawVelocity = useVelocity(scrollYProgress);
+  // Apply a spring to the velocity so the engine revs up and down smoothly
+  const smoothVelocity = useSpring(rawVelocity, {
+    damping: 50,
+    stiffness: 400
+  });
   const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
@@ -49,8 +54,8 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
     }
   }, [inView, hasStarted]);
 
-  // Handle Revving based on scroll velocity
-  useMotionValueEvent(scrollVelocity, "change", (latestVelocity) => {
+  // Handle Revving based on smooth scroll velocity
+  useMotionValueEvent(smoothVelocity, "change", (latestVelocity) => {
     if (!audioRef.current || !hasStarted) return;
     
     const audio = audioRef.current;
@@ -58,9 +63,9 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
     // Convert velocity to an absolute speed value
     const speed = Math.abs(latestVelocity);
     
-    // Map speed (0 to ~10) to playbackRate (0.8 idle to 2.5 redline)
-    // and volume (0.4 idle to 1.0 full throttle)
-    const normalizedSpeed = Math.min(speed / 5, 1); // Cap at 1
+    // scrollYProgress velocity is usually very small (0.1 to 2.0).
+    // We multiply it aggressively so normal scrolling hits high revs.
+    const normalizedSpeed = Math.min(speed * 3.0, 1); // Much more sensitive
     
     // Smoothly adjust parameters
     const targetRate = 0.8 + (normalizedSpeed * 1.5); // Range: 0.8 to 2.3
