@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, Readex_Pro } from "next/font/google";
+import { Inter, Outfit, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import SmoothScroller from "@/components/SmoothScroller";
 import CustomCursor from "@/components/CustomCursor";
@@ -17,10 +17,10 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-const readexPro = Readex_Pro({
-  variable: "--font-readex",
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${outfit.variable} ${readexPro.variable} antialiased bg-black text-white cursor-none`}
+        className={`${inter.variable} ${outfit.variable} ${ebGaramond.variable} antialiased bg-black text-white cursor-none`}
       >
         <SmoothScroller>
           <AuroraOrbs />
