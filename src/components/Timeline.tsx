@@ -1,10 +1,11 @@
 "use client";
 import React, { useRef, useMemo } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { FadeUp, StaggeredHeading } from "@/components/FadeUp";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Trail } from "@react-three/drei";
 import * as THREE from "three";
+import { useCarAudio } from "@/hooks/useCarAudio";
 
 function SpiralCar3D({ scrollYProgress }: { scrollYProgress: any }) {
   const carRef = useRef<THREE.Group>(null);
@@ -159,11 +160,14 @@ const experiences = [
 
 export default function TimelineSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { margin: "-20% 0px" });
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
   });
+
+  useCarAudio(scrollYProgress, isInView);
 
   const fillHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   
