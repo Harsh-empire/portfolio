@@ -9,16 +9,50 @@ export default function ContactTerminal() {
     frequency: "",
     payload: ""
   });
-  const [sent, setSent] = useState(false);
+  
+  // States: "idle", "loading", "success", "error"
+  const [status, setStatus] = useState("idle");
 
-  const handleSend = (e: React.FormEvent) => {
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.callsign || !formData.origin || !formData.payload) return;
-    setSent(true);
-    setTimeout(() => {
-      setFormData({ callsign: "", origin: "", frequency: "", payload: "" });
-      setSent(false);
-    }, 3000);
+    
+    setStatus("loading");
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "0ff010fe-8683-4667-9317-eb34e0af40ef",
+          name: formData.callsign,
+          email: formData.origin,
+          subject: `Portfolio Transmission from ${formData.callsign}`,
+          frequency: formData.frequency,
+          message: formData.payload,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus("success");
+        setTimeout(() => {
+          setFormData({ callsign: "", origin: "", frequency: "", payload: "" });
+          setStatus("idle");
+        }, 4000);
+      } else {
+        console.error("Web3Forms Error:", result);
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 4000);
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
@@ -44,6 +78,14 @@ export default function ContactTerminal() {
             {/* Left Side: Portrait Image with Overlay */}
             <FadeUp delay={0.2} className="w-full lg:w-5/12">
               <div className="relative w-full h-[500px] md:h-[650px] rounded-3xl overflow-hidden bg-white/5 border border-white/10 group">
+                <video 
+                  src="/profile_video.mp4" 
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover object-top hidden"
+                />
                 <img 
                   src="/profile.png" 
                   alt="Harsh Kumar"
@@ -99,8 +141,9 @@ export default function ContactTerminal() {
                       required
                       value={formData.callsign}
                       onChange={(e) => setFormData({ ...formData, callsign: e.target.value })}
-                      className="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors lowercase placeholder:text-white/20 text-sm font-mono"
+                      className="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors lowercase placeholder:text-white/20 text-sm font-mono disabled:opacity-50"
                       placeholder="your name"
+                      disabled={status !== "idle"}
                     />
                   </div>
 
@@ -114,8 +157,9 @@ export default function ContactTerminal() {
                       required
                       value={formData.origin}
                       onChange={(e) => setFormData({ ...formData, origin: e.target.value })}
-                      className="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors lowercase placeholder:text-white/20 text-sm font-mono"
+                      className="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors lowercase placeholder:text-white/20 text-sm font-mono disabled:opacity-50"
                       placeholder="you@domain.com"
+                      disabled={status !== "idle"}
                     />
                   </div>
 
@@ -128,8 +172,9 @@ export default function ContactTerminal() {
                       type="text"
                       value={formData.frequency}
                       onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
-                      className="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors lowercase placeholder:text-white/20 text-sm font-mono"
+                      className="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors lowercase placeholder:text-white/20 text-sm font-mono disabled:opacity-50"
                       placeholder="company / project"
+                      disabled={status !== "idle"}
                     />
                   </div>
 
@@ -142,8 +187,9 @@ export default function ContactTerminal() {
                       required
                       value={formData.payload}
                       onChange={(e) => setFormData({ ...formData, payload: e.target.value })}
-                      className="w-full h-32 bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors resize-none lowercase placeholder:text-white/20 text-sm font-mono"
+                      className="w-full h-32 bg-transparent border border-white/10 rounded-xl px-4 py-3 focus:border-white/30 outline-none text-white transition-colors resize-none lowercase placeholder:text-white/20 text-sm font-mono disabled:opacity-50"
                       placeholder="briefing — what are we building?"
+                      disabled={status !== "idle"}
                     />
                   </div>
 
@@ -154,14 +200,16 @@ export default function ContactTerminal() {
                     </span>
                     <button
                       type="submit"
-                      disabled={sent}
+                      disabled={status !== "idle"}
                       className={`w-full sm:w-auto px-8 py-3 rounded-full text-xs font-medium tracking-wider uppercase transition-all flex items-center justify-center gap-2 font-mono ${
-                        sent
+                        status === "success"
                           ? "bg-[#27c93f]/20 border border-[#27c93f]/50 text-[#27c93f] cursor-not-allowed"
+                          : status === "error"
+                          ? "bg-[#ff5f56]/20 border border-[#ff5f56]/50 text-[#ff5f56] cursor-not-allowed"
                           : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
                       }`}
                     >
-                      {sent ? "CHANNEL OPEN" : "execute transmission +"}
+                      {status === "loading" ? "TRANSMITTING..." : status === "success" ? "CHANNEL OPEN" : status === "error" ? "TRANSMISSION FAILED" : "execute transmission +"}
                     </button>
                   </div>
 
