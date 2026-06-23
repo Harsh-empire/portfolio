@@ -32,7 +32,7 @@ export default function ContactTerminal() {
         'service_ty280nx',   // Service ID
         'template_px8ovkh',  // Template ID
         templateParams,
-        'mbFQu4QlGQn9GQqin'  // Public Key
+        'mbFQu4QIGQn9GQqin'  // Public Key
       );
 
       console.log('EmailJS Success:', result.text);
