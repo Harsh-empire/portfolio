@@ -2,6 +2,7 @@
 import { FadeUp, StaggeredHeading } from "@/components/FadeUp";
 import { motion } from "framer-motion";
 import { BrainCircuit, Server, Database, Code2, Cloud, Layers } from "lucide-react";
+import { SystemDashboard } from "@/components/SystemDashboard";
 
 export default function SkillsMatrix() {
   return (
@@ -113,16 +114,23 @@ export default function SkillsMatrix() {
           </FadeUp>
 
           {/* Card 5: Infrastructure */}
-          <FadeUp delay={0.7} className="md:col-span-1 lg:col-span-2">
-            <div className="group relative w-full h-full rounded-3xl border border-white/10 bg-[#0a0a0a] overflow-hidden p-8 flex items-center justify-between transition-all hover:border-white/20">
+          <FadeUp delay={0.7} className="md:col-span-1 lg:col-span-1">
+            <div className="group relative w-full h-full rounded-3xl border border-white/10 bg-[#0a0a0a] overflow-hidden p-8 flex flex-col items-start justify-between transition-all hover:border-white/20">
               <div className="flex flex-col">
                 <div className="flex items-center gap-3 mb-2">
                   <Cloud className="w-5 h-5 text-white/60" />
-                  <h3 className="text-white text-lg font-medium tracking-tight lowercase">infrastructure</h3>
+                  <h3 className="text-white text-lg font-medium tracking-tight lowercase">infra</h3>
                 </div>
-                <p className="text-white/50 text-[10px] uppercase font-mono tracking-widest mt-2">docker • k8s • aws • gcp</p>
+                <p className="text-white/50 text-[10px] uppercase font-mono tracking-widest mt-2">docker • k8s</p>
               </div>
-              <Layers className="w-16 h-16 text-white/5 group-hover:text-white/20 transition-colors duration-500" />
+              <Layers className="w-12 h-12 text-white/5 group-hover:text-white/20 transition-colors duration-500 self-end mt-4" />
+            </div>
+          </FadeUp>
+
+          {/* Card 6: Live System Dashboard */}
+          <FadeUp delay={0.8} className="md:col-span-3 lg:col-span-1">
+            <div className="group relative w-full h-full rounded-3xl border border-white/10 bg-[#0a0a0a] overflow-hidden p-6 transition-all hover:border-white/20">
+              <SystemDashboard />
             </div>
           </FadeUp>
 

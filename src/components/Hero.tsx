@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LiquidButton from "@/components/LiquidButton";
 import { FadeUp, StaggeredHeading } from "@/components/FadeUp";
+import { Magnetic } from "@/components/Magnetic";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,9 +52,11 @@ export default function Hero() {
 
         {/* CTAs */}
         <FadeUp delay={1.1} y={24} className="flex flex-wrap items-center gap-6 mt-4">
-          <LiquidButton className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full text-sm font-medium uppercase tracking-wider">
-            view selected work
-          </LiquidButton>
+          <Magnetic>
+            <LiquidButton className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full text-sm font-medium uppercase tracking-wider">
+              view selected work
+            </LiquidButton>
+          </Magnetic>
           <a href="#brain" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-wider border-b border-transparent hover:border-white pb-1" data-cursor="view">
             explore the brain
           </a>

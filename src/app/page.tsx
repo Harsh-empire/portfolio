@@ -11,15 +11,20 @@ import ContactTerminal from "@/components/ContactTerminal";
 import FixedVideoBackground from "@/components/FixedVideoBackground";
 import Navbar from "@/components/Navbar";
 import MarqueeTicker from "@/components/MarqueeTicker";
+import { BootSequence } from "@/components/BootSequence";
+import { AIChatTerminal } from "@/components/AIChatTerminal";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [isBooted, setIsBooted] = useState(false);
 
   return (
     <main className="min-h-screen bg-black">
-      {loading && <Loader onComplete={() => setLoading(false)} />}
+      {!isBooted && <BootSequence onComplete={() => setIsBooted(true)} />}
       
-      {!loading && (
+      {isBooted && loading && <Loader onComplete={() => setLoading(false)} />}
+      
+      {isBooted && !loading && (
         <>
           <FixedVideoBackground />
           <Navbar />
@@ -40,6 +45,7 @@ export default function Home() {
               </footer>
             </div>
           </div>
+          <AIChatTerminal />
         </>
       )}
     </main>
