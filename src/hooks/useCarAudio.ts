@@ -20,6 +20,15 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
       audio.loop = true;
       audio.volume = 0; // Start at 0 volume to avoid abrupt pops
       audio.playbackRate = 0.8; // Idle rate
+      audio.preload = "auto";
+      
+      // Cross-browser pitch shifting (disable pitch preservation so revving sounds real)
+      audio.preservesPitch = false;
+      // @ts-ignore - Vendor prefixes
+      if (audio.mozPreservesPitch !== undefined) audio.mozPreservesPitch = false;
+      // @ts-ignore - Vendor prefixes
+      if (audio.webkitPreservesPitch !== undefined) audio.webkitPreservesPitch = false;
+      
       audioRef.current = audio;
     }
 
