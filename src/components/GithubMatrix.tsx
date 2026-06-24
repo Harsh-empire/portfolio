@@ -232,6 +232,20 @@ export default function GithubMatrix() {
           )}
         </div>
 
+        {/* Explore All Button */}
+        <FadeUp delay={0.6} y={20} className="mt-12 flex justify-center">
+          <a 
+            href="https://github.com/Harsh-empire?tab=repositories" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-black border border-[#00ffcc]/30 hover:border-[#00ffcc] text-[#00ffcc] text-xs tracking-widest uppercase font-mono transition-all overflow-hidden rounded-full cursor-[url('/cursor-explore.png'),_pointer]"
+          >
+            <div className="absolute inset-0 bg-[#00ffcc]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <FiGithub className="w-4 h-4 relative z-10" />
+            <span className="relative z-10">Explore All Repositories</span>
+          </a>
+        </FadeUp>
+
       </div>
     </section>
   );
