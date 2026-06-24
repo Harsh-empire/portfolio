@@ -10,48 +10,43 @@ const certifications = [
     company: "oracle",
     status: "active",
     description: "certified in foundational ai concepts, machine learning algorithms, and neural network architectures using the oracle cloud infrastructure (oci).",
-    language: "json",
-    codeSnippet: `{
-  "certificateId": "ORC-AI-2025-9832",
+    language: "system verification",
+    outputLog: `[SYSTEM] Initiating Oracle Certification Verification...
+[SYSTEM] Fetching credential ID: ORC-AI-2025-9832...
+
+{
   "candidate": "Harsh Kumar",
   "issuer": "Oracle Corporation",
-  "skills_verified": [
+  "status": "VALIDATED",
+  "verified_skills": [
     "Machine Learning",
     "Deep Learning",
     "Generative AI",
     "OCI AI Services"
-  ],
-  "verification_status": "VALID"
-}`
+  ]
+}
+
+[SUCCESS] Oracle AI Foundations Associate certification verified and active.`
   },
   { 
     title: "gen ai engineering mastermind", 
     company: "outskill",
     status: "active",
     description: "intensive masterclass in building generative ai pipelines, optimizing large language models (llms), and architecting retrieval-augmented generation (rag) systems.",
-    language: "python",
-    codeSnippet: `from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-from langchain.vectorstores import FAISS
+    language: "rag pipeline output",
+    outputLog: `[RAG Pipeline] Initializing Mastermind Architecture...
+[VectorDB] FAISS Index loaded: 14,203 enterprise documents.
+[LLM] GPT-4-Turbo engine engaged (temperature=0.2).
 
-def build_enterprise_rag():
-    # Load advanced vector embeddings
-    vector_store = FAISS.load_local("enterprise_knowledge_base")
-    
-    # Initialize optimized LLM
-    llm = OpenAI(temperature=0.2, model_name="gpt-4-turbo")
-    
-    # Construct Mastermind RAG Pipeline
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        chain_type="stuff",
-        retriever=vector_store.as_retriever()
-    )
-    
-    return qa_chain
+User Query: "Explain zero-trust architecture."
 
-system = build_enterprise_rag()
-system.run("Explain zero-trust architecture.")`
+[Pipeline] Retrieving relevant context...
+[Pipeline] Synthesizing response...
+
+Output:
+Zero-Trust Architecture (ZTA) is an enterprise security framework that requires all users, whether in or outside the organization's network, to be authenticated, authorized, and continuously validated for security configuration and posture before being granted or keeping access to applications and data.
+
+[System] Inference complete in 1.4s.`
   }
 ];
 

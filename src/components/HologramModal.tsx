@@ -9,6 +9,8 @@ export type ModalData = {
   company: string;
   description: string;
   codeSnippet?: string;
+  outputLog?: string;
+  image?: string;
   githubUrl?: string;
   language?: string;
 };
@@ -97,22 +99,41 @@ export function HologramModal({ isOpen, onClose, data }: HologramModalProps) {
                 )}
               </div>
 
-              {/* Right Column: Code Snippet */}
-              {data.codeSnippet && (
-                <div className="flex-1 flex flex-col border border-white/10 rounded-lg overflow-hidden bg-[#050505] z-10">
-                  <div className="flex items-center px-4 py-2 border-b border-white/10 bg-white/5">
-                    <div className="flex gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
-                    </div>
-                    <span className="ml-4 text-xs text-white/40 uppercase tracking-widest">{data.language || "typescript"}</span>
+              {/* Right Column: Output / Image */}
+              <div className="flex-1 flex flex-col border border-white/10 rounded-lg overflow-hidden bg-[#050505] z-10 relative">
+                {/* Header bar for output */}
+                <div className="flex items-center px-4 py-2 border-b border-white/10 bg-white/5 absolute top-0 left-0 right-0 z-20">
+                  <div className="flex gap-2">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
                   </div>
-                  <div className="flex-1 p-4 overflow-x-auto text-xs md:text-sm text-[#00ffcc]/80 font-mono leading-relaxed whitespace-pre" style={{ textShadow: "0 0 5px rgba(0,255,204,0.3)" }}>
-                    <code>{data.codeSnippet}</code>
-                  </div>
+                  <span className="ml-4 text-xs text-white/40 uppercase tracking-widest">
+                    {data.image ? "system visual output" : (data.language || "system output")}
+                  </span>
                 </div>
-              )}
+                
+                <div className="flex-1 overflow-y-auto mt-10 p-4">
+                  {data.image ? (
+                    <div className="w-full h-full flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src={data.image} 
+                        alt="Output" 
+                        className="max-w-full max-h-full object-contain rounded border border-white/10 opacity-80 hover:opacity-100 transition-opacity"
+                      />
+                    </div>
+                  ) : data.outputLog ? (
+                    <div className="text-xs md:text-sm text-[#00ffcc]/80 font-mono leading-relaxed whitespace-pre" style={{ textShadow: "0 0 5px rgba(0,255,204,0.3)" }}>
+                      {data.outputLog}
+                    </div>
+                  ) : data.codeSnippet ? (
+                    <div className="text-xs md:text-sm text-[#00ffcc]/80 font-mono leading-relaxed whitespace-pre" style={{ textShadow: "0 0 5px rgba(0,255,204,0.3)" }}>
+                      <code>{data.codeSnippet}</code>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
             </div>
             
             {/* CRT Scanline Overlay */}
