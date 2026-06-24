@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import DigitalBrainSection from "@/components/DigitalBrain";
 import TimelineSection from "@/components/Timeline";
 import ProjectsSection from "@/components/Projects";
+import GithubMatrix from "@/components/GithubMatrix";
 import CommandCenter from "@/components/CommandCenter";
 import SkillsMatrix from "@/components/SkillsMatrix";
 import ContactTerminal from "@/components/ContactTerminal";
@@ -31,6 +32,7 @@ export default function Home() {
               <DigitalBrainSection />
               <TimelineSection />
               <ProjectsSection />
+              <GithubMatrix />
               <CommandCenter />
               <SkillsMatrix />
               <ContactTerminal />
