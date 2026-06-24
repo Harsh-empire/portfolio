@@ -43,6 +43,10 @@ export default function RootLayout({
           <GrainOverlay />
           <CustomCursor />
           <ScrollFX />
+          
+          {/* Global Audio Elements for guaranteed autoplay unlock */}
+          <audio id="car-engine-audio" src="/sounds/car-engine.mp3" loop preload="auto" />
+          
           {children}
         </SmoothScroller>
       </body>

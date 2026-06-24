@@ -20,6 +20,15 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
     setHasStarted(true);
     let isMounted = true;
     
+    // GUARANTEED AUTOPLAY UNLOCK: Play and pause the audio element on exact user click
+    const engineAudio = document.getElementById('car-engine-audio') as HTMLAudioElement;
+    if (engineAudio) {
+      engineAudio.volume = 0;
+      engineAudio.play().then(() => {
+        engineAudio.pause();
+      }).catch(e => console.warn("Audio unlock failed", e));
+    }
+
     const runSequence = async () => {
       // Play boot sound (now guaranteed to work because it's tied to a click event)
       playBoot();

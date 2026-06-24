@@ -14,19 +14,17 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
   const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
-    // Initialize audio only on client
-    if (!audioRef.current) {
-      const audio = new Audio("/sounds/car-engine.mp3");
-      audio.loop = true;
+    // Attach to the global audio element
+    const audio = document.getElementById('car-engine-audio') as HTMLAudioElement;
+    if (audio && !audioRef.current) {
       audio.volume = 0; // Start at 0 volume to avoid abrupt pops
       audio.playbackRate = 0.8; // Idle rate
-      audio.preload = "auto";
       
-      // Cross-browser pitch shifting (disable pitch preservation so revving sounds real)
+      // Cross-browser pitch shifting
       audio.preservesPitch = false;
-      // @ts-ignore - Vendor prefixes
+      // @ts-ignore
       if (audio.mozPreservesPitch !== undefined) audio.mozPreservesPitch = false;
-      // @ts-ignore - Vendor prefixes
+      // @ts-ignore
       if (audio.webkitPreservesPitch !== undefined) audio.webkitPreservesPitch = false;
       
       audioRef.current = audio;
@@ -35,7 +33,6 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.src = "";
       }
     };
   }, []);
@@ -65,9 +62,22 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
 
   // Handle Revving based on smooth scroll velocity
   useMotionValueEvent(smoothVelocity, "change", (latestVelocity) => {
-    if (!audioRef.current || !hasStarted) return;
+    if (!audioRef.current) return;
     
     const audio = audioRef.current;
+
+    // Fallback: If inView didn't trigger, but we are scrolling, start the engine!
+    if (!hasStarted) {
+      setHasStarted(true);
+      audio.currentTime = 0;
+      audio.volume = 0.6;
+      audio.playbackRate = 1.0;
+    }
+    
+    // If the browser blocked autoplay earlier, try playing again when they scroll
+    if (audio.paused) {
+      audio.play().catch(() => {});
+    }
     
     // Convert velocity to an absolute speed value
     const speed = Math.abs(latestVelocity);
