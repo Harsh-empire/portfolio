@@ -112,24 +112,34 @@ export default function GithubMatrix() {
 
   useEffect(() => {
     async function fetchRepos() {
+      const fallbackData = [
+        { id: 1, name: "Enterprise-RAG", description: "Retrieval-Augmented Generation pipeline built for high-throughput enterprise knowledge extraction.", html_url: "https://github.com/Harsh-empire", stargazers_count: 14, forks_count: 2, language: "Python", updated_at: new Date().toISOString() },
+        { id: 2, name: "Neural-Analytics", description: "Predictive modeling and data analytics dashboard for risk profiling.", html_url: "https://github.com/Harsh-empire", stargazers_count: 8, forks_count: 1, language: "Jupyter Notebook", updated_at: new Date().toISOString() },
+        { id: 3, name: "Zero-Trust-Auth", description: "Secure WebSocket authentication layer with advanced cryptography.", html_url: "https://github.com/Harsh-empire", stargazers_count: 21, forks_count: 5, language: "TypeScript", updated_at: new Date().toISOString() },
+        { id: 4, name: "Algorithmic-Trading-Bot", description: "High-frequency trading bot simulation using Apache Kafka.", html_url: "https://github.com/Harsh-empire", stargazers_count: 32, forks_count: 8, language: "Java", updated_at: new Date().toISOString() },
+      ];
+
       try {
-        // Fetch real repos for Harsh-empire, sort by recently updated
         const res = await fetch("https://api.github.com/users/Harsh-empire/repos?sort=updated&per_page=10");
-        if (!res.ok) throw new Error("Failed to fetch");
+        
+        if (!res.ok) {
+          console.warn("Github API limit reached. Using fallback data.");
+          setRepos(fallbackData);
+          setLoading(false);
+          return;
+        }
         
         const data: Repo[] = await res.json();
-        // Filter out forks and grab top 4
         const originalRepos = data.filter(r => r.name !== "portfolio").slice(0, 4);
-        setRepos(originalRepos);
+        
+        if (originalRepos.length > 0) {
+          setRepos(originalRepos);
+        } else {
+          setRepos(fallbackData);
+        }
       } catch (err) {
         console.error("Github API Error:", err);
-        // Fallback placeholder data if API fails or rate limits
-        setRepos([
-          { id: 1, name: "Enterprise-RAG", description: "Retrieval-Augmented Generation pipeline built for high-throughput enterprise knowledge extraction.", html_url: "https://github.com/Harsh-empire", stargazers_count: 14, forks_count: 2, language: "Python", updated_at: new Date().toISOString() },
-          { id: 2, name: "Neural-Analytics", description: "Predictive modeling and data analytics dashboard for risk profiling.", html_url: "https://github.com/Harsh-empire", stargazers_count: 8, forks_count: 1, language: "Jupyter Notebook", updated_at: new Date().toISOString() },
-          { id: 3, name: "Zero-Trust-Auth", description: "Secure WebSocket authentication layer with advanced cryptography.", html_url: "https://github.com/Harsh-empire", stargazers_count: 21, forks_count: 5, language: "TypeScript", updated_at: new Date().toISOString() },
-          { id: 4, name: "Algorithmic-Trading-Bot", description: "High-frequency trading bot simulation using Apache Kafka.", html_url: "https://github.com/Harsh-empire", stargazers_count: 32, forks_count: 8, language: "Java", updated_at: new Date().toISOString() },
-        ]);
+        setRepos(fallbackData);
       } finally {
         setLoading(false);
       }
