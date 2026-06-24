@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Github, ExternalLink, Terminal } from "lucide-react";
+import { FiX, FiGithub, FiExternalLink, FiTerminal } from "react-icons/fi";
 
 export type ModalData = {
   title: string;
@@ -59,7 +59,7 @@ export function HologramModal({ isOpen, onClose, data }: HologramModalProps) {
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#00ffcc]/20 bg-[#00ffcc]/5">
               <div className="flex items-center gap-3">
-                <Terminal className="w-5 h-5 text-[#00ffcc]" />
+                <FiTerminal className="w-5 h-5 text-[#00ffcc]" />
                 <div>
                   <h3 className="text-white text-lg font-medium tracking-wide lowercase">{data.title}</h3>
                   <p className="text-[#00ffcc]/60 text-xs tracking-widest uppercase">{data.company}</p>
@@ -69,7 +69,7 @@ export function HologramModal({ isOpen, onClose, data }: HologramModalProps) {
                 onClick={onClose}
                 className="p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
               >
-                <X className="w-5 h-5" />
+                <FiX className="w-5 h-5" />
               </button>
             </div>
 
@@ -90,9 +90,9 @@ export function HologramModal({ isOpen, onClose, data }: HologramModalProps) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 border border-[#00ffcc]/30 text-[#00ffcc] hover:bg-[#00ffcc]/10 transition-colors uppercase tracking-widest text-xs"
                   >
-                    <Github className="w-4 h-4" />
+                    <FiGithub className="w-4 h-4" />
                     View Repository
-                    <ExternalLink className="w-3 h-3 ml-1" />
+                    <FiExternalLink className="w-3 h-3 ml-1" />
                   </a>
                 )}
               </div>
