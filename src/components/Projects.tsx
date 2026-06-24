@@ -13,35 +13,17 @@ const projects = [
     tech: ["python", "genai", "data analytics", "predictive modeling"],
     language: "python",
     image: "/projects/genai_analytics.png",
-    codeSnippet: `import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
-
-def predict_delinquency(data_path: str):
-    # Load enterprise customer financial dataset
-    df = pd.read_csv(data_path)
-    
-    # Feature Engineering for Risk Profiling
-    features = df[['debt_to_income', 'payment_history', 'credit_utilization']]
-    labels = df['is_delinquent']
-    
-    # Train/Test Split
-    X_train, X_test, y_train, y_test = train_test_split(
-        features, labels, test_size=0.2, random_state=42
-    )
-    
-    # AI-Driven Predictive Modeling
-    model = RandomForestClassifier(n_estimators=100, max_depth=10)
-    model.fit(X_train, y_train)
-    
-    # Generate Business Impact Report
-    predictions = model.predict(X_test)
-    print("Delinquency Prediction Report:")
-    print(classification_report(y_test, predictions))
-
-if __name__ == "__main__":
-    predict_delinquency("customer_data_2026.csv")`
+    keyFeatures: [
+      "Built random forest and gradient boosting models",
+      "Engineered 50+ risk profile features",
+      "Synthesized business storytelling dashboards"
+    ],
+    accomplishments: [
+      { metric: "15%", label: "reduction in delinquency" },
+      { metric: "98%", label: "model accuracy" },
+      { metric: "1.2M+", label: "customers profiled" },
+      { metric: "4x", label: "faster reporting" }
+    ]
   },
   {
     title: "cyber security transformation",
@@ -50,38 +32,17 @@ if __name__ == "__main__":
     tech: ["cyber security", "data analytics", "enterprise standards"],
     language: "python",
     image: "/projects/cyber_security.png",
-    codeSnippet: `import ssl
-import socket
-import logging
-
-logging.basicConfig(level=logging.INFO)
-
-def verify_enterprise_security(hostname: str, port: int = 443):
-    """
-    Enterprise Security Protocol: 
-    Validates TLS configuration against zero-trust architecture.
-    """
-    context = ssl.create_default_context()
-    context.check_hostname = True
-    context.verify_mode = ssl.CERT_REQUIRED
-    
-    # Enforce modern cipher suites
-    context.set_ciphers('ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384')
-
-    try:
-        with socket.create_connection((hostname, port)) as sock:
-            with context.wrap_socket(sock, server_hostname=hostname) as ssock:
-                cert = ssock.getpeercert()
-                logging.info(f"Security Transformation Complete: {hostname}")
-                logging.info(f"Protocol: {ssock.version()}")
-                logging.info(f"Cipher: {ssock.cipher()[0]}")
-                return True
-    except ssl.SSLError as e:
-        logging.error(f"Vulnerability Detected: {e}")
-        return False
-
-# Execute Security Audit
-verify_enterprise_security("secure-internal.deloitte.com")`
+    keyFeatures: [
+      "Audited TLS configurations and zero-trust protocols",
+      "Analyzed malware behavior and attack vectors",
+      "Drafted enterprise security incident reports"
+    ],
+    accomplishments: [
+      { metric: "0-Day", label: "vulnerabilities patched" },
+      { metric: "100%", label: "compliance achieved" },
+      { metric: "Tier 1", label: "security protocols" },
+      { metric: "24/7", label: "threat monitoring" }
+    ]
   },
   {
     title: "advanced software engineering",
@@ -90,44 +51,17 @@ verify_enterprise_security("secure-internal.deloitte.com")`
     tech: ["java", "sql", "software architecture", "data structures"],
     language: "java",
     image: "/projects/software_engineering.png",
-    codeSnippet: `package com.walmart.globaltech.optimization;
-
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.Map;
-
-/**
- * Enterprise Scale Data Structure Optimization
- * Implements a high-throughput cache for relational database queries.
- */
-public class DistributedQueryCache<K, V> {
-    
-    private final Map<K, V> highThroughputCache;
-    private final int maxCapacity;
-
-    public DistributedQueryCache(int capacity) {
-        this.maxCapacity = capacity;
-        // Optimized for multi-threaded read/write architectures
-        this.highThroughputCache = new ConcurrentHashMap<>(capacity, 0.75f, 64);
-    }
-
-    public void putOptimized(K key, V value) {
-        if (highThroughputCache.size() >= maxCapacity) {
-            evictStaleEntries();
-        }
-        highThroughputCache.put(key, value);
-    }
-
-    public V fetch(K key) {
-        return highThroughputCache.get(key);
-    }
-
-    private void evictStaleEntries() {
-        // Implement advanced LRU/LFU eviction algorithms
-        // required for enterprise-scale memory management
-        System.out.println("[SYSTEM] Evicting stale cache blocks to optimize memory.");
-        highThroughputCache.clear(); 
-    }
-}`
+    keyFeatures: [
+      "Implemented concurrent hash maps for caching",
+      "Designed distributed SQL database schemas",
+      "Optimized enterprise JVM heap configurations"
+    ],
+    accomplishments: [
+      { metric: "60%", label: "faster query times" },
+      { metric: "10k+", label: "requests per second" },
+      { metric: "O(1)", label: "cache access time" },
+      { metric: "99.9%", label: "system uptime" }
+    ]
   }
 ];
 
