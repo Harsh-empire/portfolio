@@ -13,6 +13,11 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
   
   // Use a ref instead of state to prevent stale closures during 60FPS scroll events!
   const hasStartedRef = useRef(false);
+  const inViewRef = useRef(inView);
+
+  useEffect(() => {
+    inViewRef.current = inView;
+  }, [inView]);
 
   useEffect(() => {
     // Attach to the global audio element
@@ -59,7 +64,7 @@ export function useCarAudio(scrollYProgress: MotionValue<number>, inView: boolea
 
   // Handle Revving based on smooth scroll velocity
   useMotionValueEvent(smoothVelocity, "change", (latestVelocity) => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || !inViewRef.current) return;
     
     const audio = audioRef.current;
 
