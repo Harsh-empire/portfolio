@@ -7,12 +7,14 @@ import { FadeUp, StaggeredHeading } from "@/components/FadeUp";
 import TiltCard from "@/components/TiltCard";
 import { FiGithub, FiStar, FiGitBranch, FiExternalLink } from "react-icons/fi";
 
+import { OrbitControls } from "@react-three/drei";
+
 // --- 3D MATRIX CONTRIBUTION GRAPH ---
 function ContributionGrid() {
   const meshRef = useRef<THREE.InstancedMesh>(null);
   
-  const COLS = 52;
-  const ROWS = 7;
+  const COLS = 26;
+  const ROWS = 14;
   const COUNT = COLS * ROWS;
   
   // Matrix Neon Colors (Dark to Bright)
@@ -32,7 +34,6 @@ function ContributionGrid() {
     for (let x = 0; x < COLS; x++) {
       for (let y = 0; y < ROWS; y++) {
         // Procedurally generate realistic looking activity
-        // Higher probability of activity in recent columns
         const recentBias = (x / COLS); 
         let activity = 0;
         
@@ -43,10 +44,10 @@ function ContributionGrid() {
         else if (rand > 0.3) activity = 1;
 
         data.push({
-          x: (x - COLS / 2) * 1.1,
-          z: (y - ROWS / 2) * 1.1,
+          x: (x - COLS / 2) * 1.2,
+          z: (y - ROWS / 2) * 1.2,
           activity,
-          baseHeight: activity * 0.5 + 0.1,
+          baseHeight: activity * 0.8 + 0.1,
           phase: Math.random() * Math.PI * 2
         });
       }
@@ -71,7 +72,7 @@ function ContributionGrid() {
     for (let i = 0; i < COUNT; i++) {
       const block = blocks[i];
       // Make the blocks "breathe" slightly
-      const heightOffset = Math.sin(time * 2 + block.phase) * 0.1 * block.activity;
+      const heightOffset = Math.sin(time * 3 + block.phase) * 0.15 * block.activity;
       const finalHeight = block.baseHeight + heightOffset;
 
       dummy.position.set(block.x, finalHeight / 2, block.z);
@@ -175,11 +176,19 @@ export default function GithubMatrix() {
             <span className="text-[#00ffcc] text-xs tracking-widest uppercase font-mono">Live Contribution Matrix</span>
           </div>
           
-          <Canvas camera={{ position: [0, 20, 25], fov: 40 }}>
+          <Canvas camera={{ position: [0, 18, 22], fov: 45 }}>
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 20, 10]} intensity={1.5} />
             <pointLight position={[-10, -10, -10]} intensity={0.5} color="#00ffcc" />
-            <group rotation={[Math.PI / 8, Math.PI / 6, 0]} position={[0, -2, 0]}>
+            <OrbitControls 
+              enableZoom={false} 
+              enablePan={false} 
+              autoRotate 
+              autoRotateSpeed={1.0} 
+              maxPolarAngle={Math.PI / 2.2} 
+              minPolarAngle={Math.PI / 3} 
+            />
+            <group position={[0, -2, 0]}>
               <ContributionGrid />
             </group>
           </Canvas>

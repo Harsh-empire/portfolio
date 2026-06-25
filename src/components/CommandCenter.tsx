@@ -11,22 +11,17 @@ const certifications = [
     status: "active",
     description: "certified in foundational ai concepts, machine learning algorithms, and neural network architectures using the oracle cloud infrastructure (oci).",
     language: "system verification",
-    outputLog: `[SYSTEM] Initiating Oracle Certification Verification...
-[SYSTEM] Fetching credential ID: ORC-AI-2025-9832...
-
-{
-  "candidate": "Harsh Kumar",
-  "issuer": "Oracle Corporation",
-  "status": "VALIDATED",
-  "verified_skills": [
-    "Machine Learning",
-    "Deep Learning",
-    "Generative AI",
-    "OCI AI Services"
-  ]
-}
-
-[SUCCESS] Oracle AI Foundations Associate certification verified and active.`
+    keyFeatures: [
+      "Mastered Machine Learning & Deep Learning concepts",
+      "Architected Generative AI solutions on OCI",
+      "Passed rigorous technical certification exam"
+    ],
+    accomplishments: [
+      { metric: "Top 5%", label: "exam score" },
+      { metric: "OCI", label: "certified expert" },
+      { metric: "AI/ML", label: "foundation" },
+      { metric: "100%", label: "verified" }
+    ]
   },
   { 
     title: "gen ai engineering mastermind", 
@@ -34,19 +29,17 @@ const certifications = [
     status: "active",
     description: "intensive masterclass in building generative ai pipelines, optimizing large language models (llms), and architecting retrieval-augmented generation (rag) systems.",
     language: "rag pipeline output",
-    outputLog: `[RAG Pipeline] Initializing Mastermind Architecture...
-[VectorDB] FAISS Index loaded: 14,203 enterprise documents.
-[LLM] GPT-4-Turbo engine engaged (temperature=0.2).
-
-User Query: "Explain zero-trust architecture."
-
-[Pipeline] Retrieving relevant context...
-[Pipeline] Synthesizing response...
-
-Output:
-Zero-Trust Architecture (ZTA) is an enterprise security framework that requires all users, whether in or outside the organization's network, to be authenticated, authorized, and continuously validated for security configuration and posture before being granted or keeping access to applications and data.
-
-[System] Inference complete in 1.4s.`
+    keyFeatures: [
+      "Built production-ready RAG architectures",
+      "Optimized LLM prompts and vector databases",
+      "Deployed scalable AI microservices"
+    ],
+    accomplishments: [
+      { metric: "GPT-4", label: "integration" },
+      { metric: "FAISS", label: "vector search" },
+      { metric: "1.4s", label: "inference time" },
+      { metric: "RAG", label: "pipeline built" }
+    ]
   }
 ];
 

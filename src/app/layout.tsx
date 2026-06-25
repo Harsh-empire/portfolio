@@ -3,6 +3,7 @@ import { Inter, Outfit, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import SmoothScroller from "@/components/SmoothScroller";
 import CustomCursor from "@/components/CustomCursor";
+import ParticleCursor from "@/components/ParticleCursor";
 import ScrollFX from "@/components/ScrollFX";
 import AuroraOrbs from "@/components/AuroraOrbs";
 import GrainOverlay from "@/components/GrainOverlay";
@@ -36,11 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${outfit.variable} ${ebGaramond.variable} antialiased bg-black text-white cursor-none`}
+        className={`${inter.variable} ${outfit.variable} ${ebGaramond.variable} antialiased bg-black text-white cursor-none overflow-x-hidden w-full max-w-[100vw]`}
       >
         <SmoothScroller>
           <AuroraOrbs />
           <GrainOverlay />
+          <ParticleCursor />
           <CustomCursor />
           <ScrollFX />
           
